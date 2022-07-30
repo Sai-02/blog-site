@@ -3,6 +3,14 @@ require("dotenv").config();
 const connectDB = require("./db/connect");
 const authRoutes = require("./routes/authRoutes");
 const app = express();
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.use(express.json());
 app.use("/", authRoutes);
 app.use("/", (req, res) => {
