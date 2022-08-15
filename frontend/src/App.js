@@ -1,9 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Blog from "./components/Blog/Blog";
 import CreateBlog from "./components/CreateBlog/CreateBlog";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <div
@@ -12,6 +15,7 @@ function App() {
         background: "linear-gradient(119.36deg, #F3F7FF 0%, #FEE2F6 100%)",
       }}
     >
+      <ToastContainer />
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
