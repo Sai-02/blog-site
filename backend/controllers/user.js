@@ -41,12 +41,12 @@ const loginUser = async (req, res) => {
     return res.status(400).json({ msg: "Email or password is not present !!" });
   try {
     const user = await User.findOne({ email });
-    const salt = user.salt;
-    const hashPassword = await bcrypt.hash(password, salt);
     if (!user)
       return res.status(401).json({
         msg: "User not found !!",
       });
+    const salt = user.salt;
+    const hashPassword = await bcrypt.hash(password, salt);
     if (user.password !== hashPassword)
       return res.status(403).json({ msg: "Password is incorrect" });
     const accessToken = jwt.sign(user.toJSON(), process.env.TOKEN_KEY);
