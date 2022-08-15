@@ -1,6 +1,56 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
+import { isLoggedIn, isValidEmail } from "../../helpers/helperMethods";
+import { useState } from "react";
+import { getLoginUserAPI } from "../../helpers/api";
+import axios from "axios";
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const handleIfAlreadyLoggedIn = () => {
+    if (isLoggedIn()) {
+      toast.info("Already Logged in !!");
+      navigate("/");
+    }
+  };
+  useEffect(() => {
+    handleIfAlreadyLoggedIn();
+  }, []);
+
+  const handleLogin = async () => {
+    if (email.trim() === "") {
+      toast.error("Enter email !!");
+      return;
+    }
+    if (password.trim() === "") {
+      toast.error("Enter Password!!");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      toast.error("Enter valid email !!");
+      return;
+    }
+    try {
+      const data = await axios({
+        url: getLoginUserAPI(),
+        method: "post",
+        data: {
+          email,
+          password,
+        },
+      });
+      const accessToken = data.data.accessToken;
+      sessionStorage.setItem("accessToken", accessToken);
+      toast.success("Logged In Successfully !!!");
+      navigate("/");
+    } catch (e) {
+      console.log(e);
+      toast.error(e.response.data.msg);
+    }
+  };
   return (
     <div className="h-screen w-screen flex bg-[white] xs:bg-[transparent] xs:items-center justify-center">
       <div className="bg-white rounded p-4 pt-8 xs:p-8 xs:shadow">
@@ -16,6 +66,10 @@ const Login = () => {
               type="text"
               className="rounded-[5px] border border-[#DAE1F5] outline-none px-4 py-[6px]"
               placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
             />
           </div>
           <div className="grid gap-1">
@@ -29,6 +83,9 @@ const Login = () => {
               type="text"
               className="rounded-[5px] border border-[#DAE1F5] outline-none px-4 py-[6px]"
               placeholder="Password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -44,7 +101,10 @@ const Login = () => {
           </div>
         </div>
         <div className="mt-[30px]">
-          <button className="bg-[#10182F] text-white py-3 w-full rounded">
+          <button
+            className="bg-[#10182F] text-white py-3 w-full rounded"
+            onClick={handleLogin}
+          >
             Log in
           </button>
         </div>

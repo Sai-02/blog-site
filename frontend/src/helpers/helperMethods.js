@@ -7,3 +7,9 @@ export const isValidEmail = (email) => {
   }
   return false;
 };
+
+export const isLoggedIn = () => {
+  const accessToken = sessionStorage.getItem("accessToken");
+  if (accessToken) return true;
+  return false;
+};
