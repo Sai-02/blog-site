@@ -13,3 +13,16 @@ export const isLoggedIn = () => {
   if (accessToken) return true;
   return false;
 };
+
+export const isEmptyString = (str) => {
+  if (!str || str.trim() === "") return true;
+  return false;
+};
+
+export const setAccessToken = (str) => {
+  sessionStorage.setItem("accessToken", JSON.stringify(str));
+};
+
+export const getAccessToken = () => {
+  return JSON.parse(sessionStorage.getItem("accessToken"));
+};

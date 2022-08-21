@@ -2,7 +2,11 @@ import React from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { isLoggedIn, isValidEmail } from "../../helpers/helperMethods";
+import {
+  isLoggedIn,
+  isValidEmail,
+  setAccessToken,
+} from "../../helpers/helperMethods";
 import { useState } from "react";
 import { getLoginUserAPI } from "../../helpers/api";
 import axios from "axios";
@@ -43,7 +47,7 @@ const Login = () => {
         },
       });
       const accessToken = data.data.accessToken;
-      sessionStorage.setItem("accessToken", accessToken);
+      setAccessToken(accessToken);
       toast.success("Logged In Successfully !!!");
       navigate("/");
     } catch (e) {

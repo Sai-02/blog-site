@@ -7,3 +7,7 @@ export const getRegisterUserAPI = () => {
 export const getLoginUserAPI = () => {
   return `${baseUrl}/login`;
 };
+
+export const getCreateBlogAPI = () => {
+  return `${baseUrl}/blog/create`;
+};

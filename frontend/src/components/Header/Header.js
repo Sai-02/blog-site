@@ -14,7 +14,7 @@ const Header = () => {
     <nav className="flex justify-end gap-2">
       {isLoggedIn() ? (
         <>
-          <Link to="/create">
+          <Link to="/create/blog">
             <div className="cursor-pointer text-[#10182F] hover:text-white hover:bg-[#10182F] py-1 px-2 rounded">
               Create
             </div>
