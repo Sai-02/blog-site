@@ -30,7 +30,24 @@ const editBlog = async (req, res) => {
   const user = req.user;
 };
 
+const getMyBlogs = async (req, res) => {
+  const user = req.user;
+  try {
+    const blogList = await Blog.find({
+      userID: user._id,
+    });
+    res.json({
+      blogs: blogList,
+    });
+  } catch (e) {
+    res.status(500).json({
+      msg: "Something went wrong",
+    });
+  }
+};
+
 module.exports = {
   createBlog,
   editBlog,
+  getMyBlogs,
 };
