@@ -11,3 +11,7 @@ export const getLoginUserAPI = () => {
 export const getCreateBlogAPI = () => {
   return `${baseUrl}/blog/create`;
 };
+
+export const getMyBlogsAPI = () => {
+  return `${baseUrl}/blog/myblogs`;
+};

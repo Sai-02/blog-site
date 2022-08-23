@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { isLoggedIn } from "../../helpers/helperMethods";
+import { URLPaths } from "../Utils/constants";
 const Header = () => {
   const navigate = useNavigate();
   const logoutUser = () => {
@@ -14,6 +15,16 @@ const Header = () => {
     <nav className="flex justify-end gap-2">
       {isLoggedIn() ? (
         <>
+          <Link to="/">
+            <div className="cursor-pointer text-[#10182F] hover:text-white hover:bg-[#10182F] py-1 px-2 rounded">
+              Home
+            </div>
+          </Link>
+          <Link to={URLPaths.MY_BLOGS}>
+            <div className="cursor-pointer text-[#10182F] hover:text-white hover:bg-[#10182F] py-1 px-2 rounded">
+              My Blogs
+            </div>
+          </Link>
           <Link to="/create/blog">
             <div className="cursor-pointer text-[#10182F] hover:text-white hover:bg-[#10182F] py-1 px-2 rounded">
               Create

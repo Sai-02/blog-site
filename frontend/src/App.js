@@ -6,6 +6,8 @@ import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import "react-toastify/dist/ReactToastify.css";
+import { URLPaths } from "./components/Utils/constants";
+import MyBlogs from "./components/MyBlogs/MyBlogs";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/create/blog" element={<CreateBlog />} />
+          <Route path={URLPaths.MY_BLOGS} element={<MyBlogs />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>
