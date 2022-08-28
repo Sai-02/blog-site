@@ -25,6 +25,7 @@ function App() {
           <Route path="/blog/:id" element={<Blog />} />
           <Route path="/create/blog" element={<CreateBlog />} />
           <Route path={URLPaths.MY_BLOGS} element={<MyBlogs />} />
+          <Route path={URLPaths.BLOG} element={<Blog />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </Router>

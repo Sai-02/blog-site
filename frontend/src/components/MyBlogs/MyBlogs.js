@@ -6,6 +6,7 @@ import { getMyBlogsAPI } from "../../helpers/api";
 import axios from "axios";
 import { getAccessToken } from "../../helpers/helperMethods";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 const MyBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const fetchMyBlogs = async () => {
@@ -47,9 +48,12 @@ const MyBlogs = () => {
           blogs.map((blog) => {
             return (
               <div className=" flex justify-center " key={blog._id}>
-                <div className="bg-white cursor-pointer py-2 px-8 shadow rounded min-w-[50vw] max-w-[500px]">
+                <Link
+                  to={`/blog/${blog._id}`}
+                  className="bg-white cursor-pointer py-2 px-8 shadow rounded min-w-[50vw] max-w-[500px]"
+                >
                   {blog.title}
-                </div>
+                </Link>
               </div>
             );
           })}
