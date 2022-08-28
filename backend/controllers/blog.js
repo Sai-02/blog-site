@@ -46,8 +46,23 @@ const getMyBlogs = async (req, res) => {
   }
 };
 
+const getBlog = async (req, res) => {
+  const { id } = req.query;
+  if (!id) return res.status(400).json({ msg: "id is missing" });
+  try {
+    const blog = await Blog.findOne({
+      _id: id,
+    });
+    if (!blog) return res.status(404).json({ msg: "No Blog found " });
+    return res.json(blog);
+  } catch (e) {
+    return res.status(500).json({ msg: "Something went wrong" });
+  }
+};
+
 module.exports = {
   createBlog,
   editBlog,
   getMyBlogs,
+  getBlog,
 };
