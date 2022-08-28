@@ -60,9 +60,23 @@ const getBlog = async (req, res) => {
   }
 };
 
+const deleteBlog = async (req, res) => {
+  const { id } = req.query;
+  if (!id) return res.status(400).json({ msg: "id is missing" });
+  try {
+    await Blog.deleteOne({ _id: id });
+    return res.json({
+      msg: "Deleted Successfully",
+    });
+  } catch (e) {
+    return res.status(500).json({ msg: "Something went wrong" });
+  }
+};
+
 module.exports = {
   createBlog,
   editBlog,
   getMyBlogs,
   getBlog,
+  deleteBlog,
 };
