@@ -64,6 +64,14 @@ const deleteBlog = async (req, res) => {
   const { id } = req.query;
   if (!id) return res.status(400).json({ msg: "id is missing" });
   try {
+    const blog = await Blog.findOne({
+      _id: id,
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(404).json({ msg: "No blog found" });
+  }
+  try {
     await Blog.deleteOne({ _id: id });
     return res.json({
       msg: "Deleted Successfully",
