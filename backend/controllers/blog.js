@@ -28,6 +28,23 @@ const createBlog = async (req, res) => {
 
 const editBlog = async (req, res) => {
   const user = req.user;
+  const { id, description, content, title } = req.body;
+  try {
+    await Blog.updateOne(
+      { _id: id },
+      {
+        description,
+        content,
+        title,
+      },
+      {
+        runValidators: true,
+      }
+    );
+    return res.json({ msg: "Updateded Successfully" });
+  } catch (e) {
+    return res.status(500).json({ msg: "Something went wrong" });
+  }
 };
 
 const getMyBlogs = async (req, res) => {
