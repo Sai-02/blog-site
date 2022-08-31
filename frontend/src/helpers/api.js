@@ -23,3 +23,7 @@ export const getBlogAPI = (id) => {
 export const getDeleteBlogAPI = (id) => {
   return `${baseUrl}/blog/delete?id=${id}`;
 };
+
+export const getEditBlogAPI = () => {
+  return `${baseUrl}/blog/edit`;
+};
