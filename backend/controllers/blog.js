@@ -98,10 +98,31 @@ const deleteBlog = async (req, res) => {
   }
 };
 
+const searchBlogs = async (req, res) => {
+  let { title } = req.query;
+  if (!title) title = "";
+  try {
+    const blogList = await Blog.find({
+      title: {
+        $regex: title,
+        $options: "i",
+      },
+    });
+    res.json({
+      blogs: blogList.slice(0, 10),
+    });
+  } catch (e) {
+    res.status(500).json({
+      msg: "Something went wrong",
+    });
+  }
+};
+
 module.exports = {
   createBlog,
   editBlog,
   getMyBlogs,
   getBlog,
   deleteBlog,
+  searchBlogs,
 };

@@ -5,13 +5,15 @@ const {
   editBlog,
   getMyBlogs,
   getBlog,
-  deleteBlog
+  deleteBlog,
+  searchBlogs,
 } = require("../controllers/blog");
 const { authenticateUser } = require("../controllers/helpers");
+router.get("/search", searchBlogs);
 router.use("/", authenticateUser);
 router.post("/create", createBlog);
 router.post("/edit", editBlog);
 router.get("/myblogs", getMyBlogs);
 router.get("/blog", getBlog);
-router.delete("/delete",deleteBlog);
+router.delete("/delete", deleteBlog);
 module.exports = router;
